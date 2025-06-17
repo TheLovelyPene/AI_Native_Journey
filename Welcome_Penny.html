@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AI Journey Begins</title>
+    <!-- Include PyScript CSS for basic styling -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <!-- Include PyScript JavaScript to enable Python in the browser -->
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .start-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .start-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #pyscript-output {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+            background-color: #e9eef2;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        #user-input-prompt {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        #name-input-field {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 250px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        #submit-name-button {
+            background-color: #007bff; /* Blue */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #submit-name-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My AI Journey!</h1>
+        <p>Click the button below to start our first interactive Python script.</p>
+
+        <button class="start-button" id="startButton">Start Python Script</button>
+
+        <div id="user-input-area" style="display: none;">
+            <p id="user-input-prompt"></p>
+            <input type="text" id="name-input-field" placeholder="Enter your name">
+            <button id="submit-name-button">Submit</button>
+        </div>
+
+        <div id="pyscript-output">
+            <!-- Python script output will appear here -->
+        </div>
+
+        <!-- PyScript tag to embed and run Python code -->
+        <py-script>
+import js
+
+# Store the output div element
+output_div = js.document.getElementById('pyscript-output')
+input_area = js.document.getElementById('user-input-area')
+input_prompt = js.document.getElementById('user-input-prompt')
+name_input_field = js.document.getElementById('name-input-field')
+submit_name_button = js.document.getElementById('submit-name-button')
+start_button = js.document.getElementById('startButton')
+
+# Function to run when the button is clicked
+def run_python_script(event):
+    # Hide the start button
+    start_button.style.display = 'none'
+    # Show the input area
+    input_area.style.display = 'flex'
+    input_prompt.textContent = "What is your name? "
+
+# Function to handle name submission
+def submit_name(event):
+    user_name = name_input_field.value
+    if user_name:
+        # Hide input area
+        input_area.style.display = 'none'
+        # Clear previous output
+        output_div.innerHTML = ''
+        # Display the personalized message
+        output_div.textContent = f"Welcome {user_name}! I am new to AI"
+    else:
+        output_div.textContent = "Please enter your name!"
+
+# Attach the Python function to the HTML button's click event
+start_button.onclick = run_python_script
+submit_name_button.onclick = submit_name
+        </py-script>
+    </div>
+</body>
+</html>
